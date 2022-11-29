@@ -1,0 +1,23 @@
+{
+  "name": "crossmint",
+  "version": "1.0.0",
+  "description": "Create your own  megaverse",
+  "main": "index.mjs",
+  "scripts": {
+    "start": "node index.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/sabriskay/challenges.git"
+  },
+  "author": "sabrina sproviero",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sabriskay/challenges/issues"
+  },
+  "homepage": "https://github.com/sabriskay/challenges#readme",
+  "dependencies": {
+    "async": "^3.2.4",
+    "got": "^12.5.3"
+  }
+}
