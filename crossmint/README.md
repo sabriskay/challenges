@@ -1,6 +1,6 @@
-TODO - Titulo
+# The megaverse
 
-TODO - Escribi algo
+This Application uses the Megaverse API to create a new megaverse image with diferents astral objects.
 
 ## Installation
 
