@@ -1,0 +1,13 @@
+{
+  "name": "rotunda-challenges",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile-parser": "cd ./parser-exercise/ && npx tsc",
+    "run-parser": "node ./parser-exercise/index.js"
+  },
+  "author": "Sabrina Kay Sproviero",
+  "license": "ISC"
+}
