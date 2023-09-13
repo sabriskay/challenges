@@ -1,5 +1,5 @@
 {
-  "name": "parser-exercise",
+  "name": "error-alarm-exercise",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,7 +10,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "typescript": "^5.2.2"
+  "dependencies": {
+    "nodemailer": "^6.9.5"
   }
 }

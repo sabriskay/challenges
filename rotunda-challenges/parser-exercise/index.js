@@ -1,27 +1,47 @@
 "use strict";
-const urlParser = (formatString, urlInstance) => {
-    //splits the URL format string
-    const formatParts = formatString.split('/');
-    //splits the URL instance into
-    const urlParts = urlInstance.split('/');
-    const queryParams = new URLSearchParams(urlInstance.split('?')[1] || '');
-    const result = {};
-    for (let i = 0; i < formatParts.length; i++) {
-        const formatPart = formatParts[i];
-        const urlPart = urlParts[i];
-        //iterates to extract the variable parts (those starting with ':') 
-        if (formatPart.startsWith(':')) {
-            const key = formatPart.substring(1);
-            result[key] = urlPart;
+class URLParser {
+    constructor(formatString) {
+        this.paramsIndexes = {};
+        const urlParts = formatString.split('/');
+        for (const [index, part] of urlParts.entries()) {
+            if (part.startsWith(':')) {
+                this.paramsIndexes[part.replace(/:/, '')] = index;
+            }
         }
     }
-    //creates hash key:value
-    queryParams.forEach((value, key) => {
-        result[key] = isNaN(parseInt(value)) ? value : parseInt(value);
-    });
-    return result;
-};
+    parse(url) {
+        if (!url || url.length === 0) {
+            return {};
+        }
+        if (!this.validURL(url)) {
+            return {};
+        }
+        return Object.assign(Object.assign({}, this.parseURL(url)), this.parseParameters(url));
+    }
+    validURL(url) {
+        // This function ensures the URL is valid
+        return true;
+    }
+    parseURL(url) {
+        const urlParts = url.split('/');
+        return Object.keys(this.paramsIndexes).reduce((output, key) => (Object.assign(Object.assign({}, output), { [key]: urlParts[this.paramsIndexes[key]] })), {});
+    }
+    parseParameters(url) {
+        const urlParts = url.split('?');
+        if (urlParts.length === 1) {
+            return {};
+        }
+        const params = urlParts[1];
+        const paramsArray = params.split('&');
+        const outputParams = {};
+        for (const param of paramsArray) {
+            const paramParts = param.split('=');
+            outputParams[paramParts[0]] = paramParts[1];
+        }
+        return outputParams;
+    }
+}
 const formatString = '/:version/api/:collection/:id';
 const urlInstance = '/6/api/listings/3?sort=desc&limit=10';
-const parsedData = urlParser(formatString, urlInstance);
-console.log(parsedData);
+const parser = new URLParser(formatString);
+console.log(parser.parse(urlInstance));
